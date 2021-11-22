@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/xterm@4.9.0/css/xterm.css">
+  <script src="https://unpkg.com/xterm@4.9.0/lib/xterm.js"></script>
+</head>
+
+<body>
+  <div id="terminal"></div>
+  <script>
+    let term = new Terminal();
+    term.open(document.getElementById('terminal'));
+    function runFakeTerminal() {
+      if (term._initialized) {
+        return;
+      }
+      term._initialized = true;
+      term.setOption('theme', { 'cursor': 'transparent', 'cursorAccent': 'transparent' })
+
+      term.writeln('Welcome to xterm.js');
+      term.writeln('This is a local terminal emulation, without a real terminal in the back-end.');
+      term.writeln('Type some keys and commands to play around.');
+      term.writeln('');
+    }
+    runFakeTerminal()
+
+    setInterval(() => {
+      term.writeln(`CurrentTime: ${new Date()}`)
+    }, 1000);
+  </script>
+</body>
+
+</html>
